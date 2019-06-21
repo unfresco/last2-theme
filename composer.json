@@ -1,0 +1,6 @@
+{
+    "name": "unfresco/last2-theme",
+    "require": {
+	    "htmlburger/carbon-fields": "2.2.0"
+    }
+}
