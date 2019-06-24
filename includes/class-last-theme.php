@@ -49,7 +49,6 @@ class Last_Theme {
 		 */
 		require_once get_template_directory() . '/includes/class-last-metafields.php';
 		$this->meta_fields = new Last_Metafields();
-		$this->meta_fields->boot();
 		
 		
 		require_once get_template_directory() . '/admin/class-last-theme-admin.php';
@@ -75,12 +74,8 @@ class Last_Theme {
 		$theme_admin = new Last_Theme_Admin( $this->theme_name, $this->get_version() );
 		
 		$this->loader()->add_action( 'after_setup_theme', $theme_admin, 'theme_supports' );
-		
-		if ( $this->meta_fields->is_loaded() ) {
-			
-			$this->loader()->add_action( 'carbon_fields_register_fields', $theme_admin, 'register_carbon_fields_options' );
-
-		}
+		$this->loader()->add_action( 'after_setup_theme', $this->meta_fields, 'load_framework' );
+		$this->loader()->add_action( 'carbon_fields_register_fields', $theme_admin, 'register_carbon_fields_options' );
 		
 	}
 
